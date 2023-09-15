@@ -3,12 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 const FavSlice = createSlice({
   name: "favorites",
   initialState: {
-    items: [],
+    items: JSON.parse(localStorage.getItem("favorites")) || [],
   },
 
   reducers: {
     addToFav: (state, action) => {
-      state.items.push(action.payload);
+      const existingCity = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (!existingCity) {
+        state.items.push(action.payload);
+      } else {
+        console.warn(
+          `City with id ${action.payload.id} already exists in favorites!`
+        );
+      }
+      localStorage.setItem("favorites", JSON.stringify(state.items));
     },
     emptyFav: (state) => {
       state.items = [];

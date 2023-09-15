@@ -34,9 +34,9 @@ function Sidebar({ activeComponent, handleComponentChange }) {
                   </Disclosure.Button>
                 </div>
                 <Link to="#">
-                  <div className="flex justify-center items-center gap-4 h-16 p-4 text-lg ml-16">
-                    <span className="cursor-pointer text-base font-bold text-white">
-                      Test
+                  <div className="flex justify-center items-center gap-4 h-16 p-4 ml-16">
+                    <span className="cursor-pointer text-xl font-bold text-white">
+                      Weather-App
                     </span>
                   </div>
                 </Link>

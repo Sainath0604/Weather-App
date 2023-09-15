@@ -7,9 +7,6 @@ function SmSidebar({ activeComponent, handleComponentChange }) {
       <div className="mt-5 ">
         <div className="text-sm lg:text-xs flex flex-col gap-4">
           <div className="flex flex-col">
-            <span className="pl-2 lg:pl-4 py-2 text-xs font-bold text-[#414145]">
-              Categories
-            </span>
             <div className="flex flex-col gap-2 px-4">
               <ul className="flex flex-col gap-2 text-base font-semibold text-white mb-6">
                 <li

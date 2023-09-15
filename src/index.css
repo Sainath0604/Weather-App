@@ -27,5 +27,10 @@ input:focus {
   padding: 0;
   border: 1px solid #047857;
   border-radius: 8px;
-  top: -20vh;
+}
+
+@media (min-width: 768px) {
+  .popup-content {
+    top: -20vh;
+  }
 }

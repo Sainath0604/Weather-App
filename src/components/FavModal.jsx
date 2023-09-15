@@ -5,13 +5,8 @@ import Clear from "../Images/Clear.png";
 import Clouds from "../Images/Clouds.png";
 import Rain from "../Images/Rain.png";
 import Thunderstorm from "../Images/Thunderstorm.png";
-import { useDispatch } from "react-redux";
-import { addToFav, emptyFav } from "../toolkit/Reducer";
-import { useEffect, useRef, useState } from "react";
-import * as Toast from "@radix-ui/react-toast";
 
-function DetailsModal({
-  id,
+function FavModal({
   name,
   temp,
   desc,
@@ -25,61 +20,10 @@ function DetailsModal({
   pressure,
   onCancel,
 }) {
-  const dispatch = useDispatch();
-
   const handleCancel = () => {
     onCancel();
   };
 
-  function handleAddToFav() {
-    try {
-      dispatch(
-        addToFav({
-          id: id,
-          name: name,
-          temp: temp,
-          desc: desc,
-          humidity: humidity,
-          wind: wind,
-          maxTemp: maxTemp,
-          minTemp: minTemp,
-          seaLevel: seaLevel,
-          feelsLike: feelsLike,
-          main: main,
-          pressure: pressure,
-        })
-      );
-
-      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      favorites.push({
-        id: id,
-        name: name,
-        temp: temp,
-        desc: desc,
-        humidity: humidity,
-        wind: wind,
-        maxTemp: maxTemp,
-        minTemp: minTemp,
-        seaLevel: seaLevel,
-        feelsLike: feelsLike,
-        main: main,
-        pressure: pressure,
-      });
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    } catch (error) {
-      console.log("error");
-    }
-  }
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (favorites.length > 0) {
-      dispatch(emptyFav());
-      favorites.forEach((favorite) => dispatch(addToFav(favorite)));
-    }
-  }, []);
-
-  const [open, setOpen] = useState(false);
-  const timerRef = useRef(0);
   return (
     <div className="flex flex-col rounded-lg p-2 bg-gradient-to-r from-emerald-400/75 to-emerald-200/75">
       <div className="flex justify-end pr-2 pt-2">
@@ -203,41 +147,12 @@ function DetailsModal({
               )}
             </ul>
           </div>
-          <div className="pt-4">
-            <Toast.Provider swipeDirection="right">
-              <button
-                className="border border-rose-800 bg-rose-600 text-white rounded-lg px-3 py-[5px]"
-                onClick={() => {
-                  setOpen(false);
-                  window.clearTimeout(timerRef.current);
-                  timerRef.current = window.setTimeout(() => {
-                    setOpen(true);
-                  }, 100);
-                  handleAddToFav();
-                }}
-              >
-                Add to Favorites
-              </button>
-              <Toast.Root
-                duration={2000}
-                className="bg-gray-300 text-black text-xl font-semibold rounded-lg px-6 py-4 shadow-sm shadow-black fixed top-5 right-5 md:top-10 md:right-28 max-w-xs"
-                open={open}
-                onOpenChange={setOpen}
-              >
-                <Toast.Title className="ToastTitle">
-                  Added to favorites
-                </Toast.Title>
-              </Toast.Root>
-              <Toast.Viewport className="ToastViewport" />
-            </Toast.Provider>
-          </div>
         </div>
       </div>
     </div>
   );
 }
-DetailsModal.propTypes = {
-  id: PropTypes.number,
+FavModal.propTypes = {
   name: PropTypes.string,
   desc: PropTypes.string,
   temp: PropTypes.number,
@@ -251,4 +166,4 @@ DetailsModal.propTypes = {
   main: PropTypes.string,
   onCancel: PropTypes.func,
 };
-export default DetailsModal;
+export default FavModal;
