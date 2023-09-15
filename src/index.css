@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input:focus {
-  outline: none;
-}
-
 ::-webkit-scrollbar {
   width: 2px;
   background: transparent;
@@ -26,11 +22,13 @@ input:focus {
 .popup-content {
   padding: 0;
   border: 1px solid #047857;
-  border-radius: 8px;
+  border-radius: 0.75rem;
+  width: 90%;
 }
 
 @media (min-width: 768px) {
   .popup-content {
     top: -20vh;
+    width: 50%;
   }
 }

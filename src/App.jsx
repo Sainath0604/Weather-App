@@ -5,7 +5,7 @@ import Favorites from "./components/Favorites";
 
 export default function App() {
   return (
-    <div>
+    <div className="bg-zinc-100 text-zinc-950">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 function MdSidebar({ activeComponent, handleComponentChange }) {
   return (
-    <div className="hidden md:block min-h-screen bg-[#100f12]">
+    <div className="hidden md:block min-h-screen">
       <div className="flex flex-col">
         <Link to="#">
           <div className="flex justify-center items-center gap-4 h-20 p-4">
-            <span className="cursor-pointer text-xl font-bold text-white">
+            <span className="cursor-pointer text-xl font-bold">
               Weather-App
             </span>
           </div>
@@ -18,12 +18,12 @@ function MdSidebar({ activeComponent, handleComponentChange }) {
             <div className="text-sm lg:text-xs flex flex-col gap-4">
               <div className="flex flex-col">
                 <div className="flex flex-col gap-2 px-4">
-                  <ul className="flex flex-col gap-2 text-base font-semibold text-white">
+                  <ul className="flex flex-col gap-2 text-base font-semibold">
                     <li
-                      className={`flex items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer text-white ${
+                      className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
                         activeComponent === "Cities"
-                          ? "bg-[#9e2b24] text-white"
-                          : "hover:bg-[#9e2b24] hover:text-white"
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-blue-600 hover:text-white"
                       }`}
                       onClick={() => handleComponentChange("Cities")}
                     >
@@ -34,10 +34,10 @@ function MdSidebar({ activeComponent, handleComponentChange }) {
                     </li>
 
                     <li
-                      className={`flex items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer text-white ${
+                      className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
                         activeComponent === "Favorites"
-                          ? "bg-[#9e2b24] text-white"
-                          : "hover:bg-[#9e2b24] hover:text-white"
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-blue-600 hover:text-white"
                       }`}
                       onClick={() => handleComponentChange("Favorites")}
                     >

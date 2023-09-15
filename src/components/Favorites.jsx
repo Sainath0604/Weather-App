@@ -35,7 +35,7 @@ function Favorites() {
   }, [favorite]);
 
   return (
-    <div className="p-6 lg:p-5">
+    <div className="">
       {favoriteLength === 0 ? (
         <div className="flex flex-col gap-8 p-2">
           <h1 className="text-center text-red-700 font-bold text-3xl">
@@ -45,54 +45,56 @@ function Favorites() {
         </div>
       ) : (
         <div className="flex flex-col gap-4 p-2 justify-center">
-          <h1 className="text-center text-red-700 font-bold text-3xl">
+          <h1 className="text-center text-blue-600 font-bold text-xl py-4">
             Favorites
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-8 gap-y-5 py-4 px-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-8 gap-y-5 py-4 px-2 md:px-16">
             {favorite.map((item) => (
               <div
-                className="border bg-gradient-to-r from-emerald-400/75 to-emerald-200/75 outline outline-emerald-600 px-6 py-4 rounded-lg  shadow-md shadow-emerald-800 transition ease-in-out hover:-translate-y-[2px] hover:scale-100 hover:shadow-emerald-300/50"
+                className="border border-blue-600/25 rounded-lg p-4 bg-white hover:shadow-md transition-all duration-200 hover:scale-[1.05]"
                 key={item.id}
               >
-                <div>
-                  <div className="flex justify-end">
-                    <button
-                      className="h-7 w-7 hover:bg-emerald-300 rounded-full p-[6px]"
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      <CrossIcon />
-                    </button>
-                  </div>
+                <div className="">
                   <div className="flex items-center">
-                    <Popup
-                      trigger={
-                        <button className="mr-2 text-xl font-semibold hover:font-bold">
-                          {item.name.toUpperCase()}
+                    <div className="flex items-center flex-row-reverse w-full justify-between">
+                      <div className="flex justify-end">
+                        <button
+                          className="h-7 w-7 hover:bg-emerald-300 rounded-full p-[6px]"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          <CrossIcon />
                         </button>
-                      }
-                      modal
-                      nested
-                    >
-                      {(close) => (
-                        <div>
-                          <FavModal
-                            id={item.id}
-                            name={item.name}
-                            temp={item.temp}
-                            desc={item.desc}
-                            humidity={item.humidity}
-                            wind={item.wind}
-                            maxTemp={item.maxTemp}
-                            minTemp={item.minTemp}
-                            seaLevel={item.seaLevel}
-                            feelsLike={item.feelsLike}
-                            pressure={item.pressure}
-                            main={item.main}
-                            onCancel={close}
-                          />
-                        </div>
-                      )}
-                    </Popup>
+                      </div>
+                      <Popup
+                        trigger={
+                          <button className="mr-2 text-xl font-semibold hover:font-bold">
+                            {item.name.toUpperCase()}
+                          </button>
+                        }
+                        modal
+                        nested
+                      >
+                        {(close) => (
+                          <div>
+                            <FavModal
+                              id={item.id}
+                              name={item.name}
+                              temp={item.temp}
+                              desc={item.desc}
+                              humidity={item.humidity}
+                              wind={item.wind}
+                              maxTemp={item.maxTemp}
+                              minTemp={item.minTemp}
+                              seaLevel={item.seaLevel}
+                              feelsLike={item.feelsLike}
+                              pressure={item.pressure}
+                              main={item.main}
+                              onCancel={close}
+                            />
+                          </div>
+                        )}
+                      </Popup>
+                    </div>
                   </div>
                   <div className="flex gap-4 items-center">
                     <div>

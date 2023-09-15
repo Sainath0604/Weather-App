@@ -1,5 +1,14 @@
 import PropTypes from "prop-types";
-import { CrossIcon, WindIcon } from "../Icons/Icons";
+import {
+  CrossIcon,
+  FavoritesIcon,
+  HighTempIcon,
+  HumidityIcon,
+  LowTempIcon,
+  PressureIcon,
+  WaveIcon,
+  WindIcon,
+} from "../Icons/Icons";
 import Haze from "../Images/Haze.png";
 import Clear from "../Images/Clear.png";
 import Clouds from "../Images/Clouds.png";
@@ -81,46 +90,47 @@ function DetailsModal({
   const [open, setOpen] = useState(false);
   const timerRef = useRef(0);
   return (
-    <div className="flex flex-col rounded-lg p-2 bg-gradient-to-r from-emerald-400/75 to-emerald-200/75">
-      <div className="flex justify-end pr-2 pt-2">
-        <button
-          className="h-7 w-7 hover:bg-emerald-300 rounded-full p-[6px]"
-          onClick={handleCancel}
-        >
-          <CrossIcon />
-        </button>
-      </div>
-      <div className="px-16 py-4">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center">
-            <button className="mr-2 text-xl font-bold">
-              {name.toUpperCase()}-
-            </button>
-
-            <span>Current weather</span>
-          </div>
-          <div className="flex gap-4 items-center">
-            <div>
-              {main === "Haze" && (
-                <img className="w-16" src={Haze} alt={main} />
-              )}
-              {main === "Rain" && (
-                <img className="w-16" src={Rain} alt={main} />
-              )}
-              {main === "Clear" && (
-                <img className="w-16" src={Clear} alt={main} />
-              )}
-              {main === "Thunderstorm" && (
-                <img className="w-16" src={Thunderstorm} alt={main} />
-              )}
-              {main === "Clouds" && (
-                <img className="w-16" src={Clouds} alt={main} />
-              )}
-              {!["Haze", "Rain", "Clear", "Thunderstorm", "Clouds"].includes(
-                main
-              ) && <img className="w-16" src={Haze} alt={main} />}
+    <div className="flex flex-col rounded-xl px-4 py-6 text-base">
+      <div className="px-2 lg:px-10 py-4">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2 lg:flex-row-reverse justify-between">
+            <div className="flex w-full justify-end">
+              <button
+                className="h-8 w-8 hover:bg-blue-400 rounded-full p-[6px]"
+                onClick={handleCancel}
+              >
+                <CrossIcon />
+              </button>
             </div>
-            <div>
+            <div className="flex items-center lg:w-full">
+              <button className="mr-2 text-2xl font-bold">
+                {name.toUpperCase()}-
+              </button>
+              <span>Current weather</span>
+            </div>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-16 items-center lg:mt-6">
+            <div className="flex flex-col lg:items-center lg:gap-4 lg:flex-row gap-2">
+              <div className="w-full flex justify-center lg:justify-start">
+                {main === "Haze" && (
+                  <img className="w-16" src={Haze} alt={main} />
+                )}
+                {main === "Rain" && (
+                  <img className="w-16" src={Rain} alt={main} />
+                )}
+                {main === "Clear" && (
+                  <img className="w-16" src={Clear} alt={main} />
+                )}
+                {main === "Thunderstorm" && (
+                  <img className="w-16" src={Thunderstorm} alt={main} />
+                )}
+                {main === "Clouds" && (
+                  <img className="w-16" src={Clouds} alt={main} />
+                )}
+                {!["Haze", "Rain", "Clear", "Thunderstorm", "Clouds"].includes(
+                  main
+                ) && <img className="w-16" src={Haze} alt={main} />}
+              </div>
               <div>
                 <span className="text-3xl">{(temp - 273.15).toFixed(2)}</span>
                 <sup className="text-2xl">°</sup>
@@ -136,10 +146,10 @@ function DetailsModal({
             </div>
           </div>
           <div>
-            <ul className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-8 gap-y-4">
+            <ul className="grid grid-cols-2 gap-x-4 lg:grid-cols-5 lg:gap-x-8 gap-y-4 px-8 lg:px-0 text-lg">
               <li className="flex flex-col">
                 <span>Wind</span>
-                <div className="flex gap-1 items-center">
+                <div className="flex gap-1 items-center font-semibold">
                   <span>
                     <WindIcon />
                   </span>
@@ -150,21 +160,23 @@ function DetailsModal({
                 <span>Humidity</span>
                 <div className="flex gap-1 items-center">
                   <span>
-                    <WindIcon />
+                    <HumidityIcon />
                   </span>
-                  <span>{humidity} %</span>
+                  <span className="font-semibold">{humidity} %</span>
                 </div>
               </li>
               <li className="flex flex-col">
                 <span>Max Temp.</span>
                 <div className="flex gap-1 items-center">
                   <span>
-                    <WindIcon />
+                    <HighTempIcon />
                   </span>
                   <div>
-                    <span className="">{(maxTemp - 273.15).toFixed(2)}</span>
-                    <sup className="">°</sup>
-                    <span>C</span>
+                    <span className="font-semibold">
+                      {(maxTemp - 273.15).toFixed(2)}
+                    </span>
+                    <sup className="font-semibold">°</sup>
+                    <span className="font-semibold">C</span>
                   </div>
                 </div>
               </li>
@@ -172,20 +184,22 @@ function DetailsModal({
                 <span>Min Temp.</span>
                 <div className="flex gap-1 items-center">
                   <span>
-                    <WindIcon />
+                    <LowTempIcon />
                   </span>
                   <div>
-                    <span className="">{(minTemp - 273.15).toFixed(2)}</span>
-                    <sup className="">°</sup>
-                    <span>C</span>
+                    <span className="font-semibold">
+                      {(minTemp - 273.15).toFixed(2)}
+                    </span>
+                    <sup className="font-semibold">°</sup>
+                    <span className="font-semibold">C</span>
                   </div>
                 </div>
               </li>
               <li className="flex flex-col">
                 <span>Pressure</span>
-                <div className="flex gap-1 items-center">
+                <div className="flex gap-1 items-center font-semibold">
                   <span>
-                    <WindIcon />
+                    <PressureIcon />
                   </span>
                   <span>{pressure} mb</span>
                 </div>
@@ -193,20 +207,20 @@ function DetailsModal({
               {seaLevel && (
                 <li className="flex flex-col">
                   <span>Sea Level</span>
-                  <div className="flex gap-1 items-center">
+                  <div className="flex gap-1 items-center font-semibold">
                     <span>
-                      <WindIcon />
+                      <WaveIcon />
                     </span>
-                    <span>{seaLevel} </span>
+                    <span>{seaLevel} MSL</span>
                   </div>
                 </li>
               )}
             </ul>
           </div>
-          <div className="pt-4">
+          <div className="flex justify-center lg:justify-end">
             <Toast.Provider swipeDirection="right">
               <button
-                className="border border-rose-800 bg-rose-600 text-white rounded-lg px-3 py-[5px]"
+                className="border border-blue-600 bg-blue-600 hover:bg-blue-500 text-white rounded-lg px-3 py-[5px] flex gap-2 items-center"
                 onClick={() => {
                   setOpen(false);
                   window.clearTimeout(timerRef.current);
@@ -216,11 +230,14 @@ function DetailsModal({
                   handleAddToFav();
                 }}
               >
-                Add to Favorites
+                <span>
+                  <FavoritesIcon />
+                </span>
+                <span>Add to Favorites</span>
               </button>
               <Toast.Root
                 duration={2000}
-                className="bg-gray-300 text-black text-xl font-semibold rounded-lg px-6 py-4 shadow-sm shadow-black fixed top-5 right-5 md:top-10 md:right-28 max-w-xs"
+                className="bg-gray-300 text-black text-xl font-semibold rounded-lg px-6 py-4 shadow-sm shadow-black fixed top-5 right-5 lg:top-10 lg:right-28 max-w-xs"
                 open={open}
                 onOpenChange={setOpen}
               >

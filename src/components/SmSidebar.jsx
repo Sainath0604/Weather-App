@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 
 function SmSidebar({ activeComponent, handleComponentChange }) {
   return (
-    <div>
-      <div className="mt-5 ">
+    <>
+      <div className="mt-5 pb-8">
         <div className="text-sm lg:text-xs flex flex-col gap-4">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 px-4">
-              <ul className="flex flex-col gap-2 text-base font-semibold text-white mb-6">
+              <ul className="flex flex-col gap-2 text-base font-semibold">
                 <li
-                  className={`flex items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer text-white ${
+                  className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
                     activeComponent === "Cities"
-                      ? "bg-[#9e2b24] text-white"
-                      : "hover:bg-[#9e2b24] hover:text-white"
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-blue-600 hover:text-white"
                   }`}
                   onClick={() => handleComponentChange("Cities")}
                 >
@@ -24,10 +24,10 @@ function SmSidebar({ activeComponent, handleComponentChange }) {
                 </li>
 
                 <li
-                  className={`flex items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer text-white ${
+                  className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
                     activeComponent === "Favorites"
-                      ? "bg-[#9e2b24] text-white"
-                      : "hover:bg-[#9e2b24] hover:text-white"
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-blue-600 hover:text-white"
                   }`}
                   onClick={() => handleComponentChange("Favorites")}
                 >
@@ -41,7 +41,7 @@ function SmSidebar({ activeComponent, handleComponentChange }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 SmSidebar.propTypes = {

@@ -22,7 +22,7 @@ function Home() {
             handleComponentChange={handleComponentChange}
           />
         </div>
-        <div className="border-l border-gray-600 md:w-[85%]">
+        <div className="border-l border-gray-400 md:w-[85%]">
           {activeComponent === "Cities" && <Cities />}
           {activeComponent === "Favorites" && <Favorites />}
         </div>
