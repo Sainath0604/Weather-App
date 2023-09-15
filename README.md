@@ -17,7 +17,7 @@
 Navigate to the directory where you wish to clone this project and execute the following command:
 
 ```bash
-git clone https://github.com/Sainath0604/Table-Data-UI.git
+git clone https://github.com/Sainath0604/Weather-App.git
 ```
 Ensure that you have Node.js installed; if not, you can download it from the official website:
 
