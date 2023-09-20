@@ -76,114 +76,115 @@ function Cities() {
                 item.name.toLowerCase().includes(input.toLowerCase())
               )
               .map((item) => (
-                <button
-                  className="border border-blue-600/25 rounded-lg p-4 bg-white hover:shadow-md transition-all duration-200 hover:scale-[1.05]"
+                <Popup
                   key={item.id}
-                >
-                  <div className="flex items-center">
-                    <Popup
-                      trigger={
+                  trigger={
+                    <div
+                      id="card"
+                      className="border border-blue-600/25 rounded-lg p-4 bg-white hover:shadow-md transition-all duration-200 hover:scale-[1.05] cursor-pointer"
+                    >
+                      <div className="flex items-center">
                         <button className="mr-2 text-xl font-semibold hover:font-bold">
                           {item.name.toUpperCase()}
                         </button>
-                      }
-                      modal
-                      nested
-                    >
-                      {(close) => (
+                      </div>
+                      <div className="flex gap-4 items-center">
                         <div>
-                          <DetailsModal
-                            id={item.id}
-                            name={item.name}
-                            temp={item.main.temp}
-                            desc={item.weather[0].description}
-                            humidity={item.main.humidity}
-                            wind={item.wind.speed}
-                            maxTemp={item.main.temp_max}
-                            minTemp={item.main.temp_min}
-                            seaLevel={item.main.sea_level}
-                            feelsLike={item.main.feels_like}
-                            pressure={item.main.pressure}
-                            main={item.weather[0].main}
-                            onCancel={close}
-                          />
+                          {item.weather[0].main === "Haze" && (
+                            <img
+                              className="w-16"
+                              src={Haze}
+                              alt={item.weather[0].main}
+                            />
+                          )}
+                          {item.weather[0].main === "Rain" && (
+                            <img
+                              className="w-16"
+                              src={Rain}
+                              alt={item.weather[0].main}
+                            />
+                          )}
+                          {item.weather[0].main === "Clear" && (
+                            <img
+                              className="w-16"
+                              src={Clear}
+                              alt={item.weather[0].main}
+                            />
+                          )}
+                          {item.weather[0].main === "Thunderstorm" && (
+                            <img
+                              className="w-16"
+                              src={Thunderstorm}
+                              alt={item.weather[0].main}
+                            />
+                          )}
+                          {item.weather[0].main === "Clouds" && (
+                            <img
+                              className="w-16"
+                              src={Clouds}
+                              alt={item.weather[0].main}
+                            />
+                          )}
+                          {![
+                            "Haze",
+                            "Rain",
+                            "Clear",
+                            "Thunderstorm",
+                            "Clouds",
+                          ].includes(item.weather[0].main) && (
+                            <img
+                              className="w-16"
+                              src={Haze}
+                              alt={item.weather[0].main}
+                            />
+                          )}
                         </div>
-                      )}
-                    </Popup>
-                  </div>
-                  <div className="flex gap-4 items-center">
-                    <div>
-                      {item.weather[0].main === "Haze" && (
-                        <img
-                          className="w-16"
-                          src={Haze}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                      {item.weather[0].main === "Rain" && (
-                        <img
-                          className="w-16"
-                          src={Rain}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                      {item.weather[0].main === "Clear" && (
-                        <img
-                          className="w-16"
-                          src={Clear}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                      {item.weather[0].main === "Thunderstorm" && (
-                        <img
-                          className="w-16"
-                          src={Thunderstorm}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                      {item.weather[0].main === "Clouds" && (
-                        <img
-                          className="w-16"
-                          src={Clouds}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                      {![
-                        "Haze",
-                        "Rain",
-                        "Clear",
-                        "Thunderstorm",
-                        "Clouds",
-                      ].includes(item.weather[0].main) && (
-                        <img
-                          className="w-16"
-                          src={Haze}
-                          alt={item.weather[0].main}
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <div>
-                        <span className="text-3xl">
-                          {(item.main.temp - 273.15).toFixed(2)}
-                        </span>
-                        <sup className="text-2xl">°</sup>
-                        <span className="text-3xl">C</span>
+                        <div>
+                          <div>
+                            <span className="text-3xl">
+                              {(item.main.temp - 273.15).toFixed(2)}
+                            </span>
+                            <sup className="text-2xl">°</sup>
+                            <span className="text-3xl">C</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-lg font-semibold capitalize">
+                            {item.weather[0].description}
+                          </span>
+                          <div className="text-base">
+                            <span className="mr-2">Feels Like</span>
+                            <span>
+                              {(item.main.feels_like - 273.15).toFixed(2)}°
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-lg font-semibold capitalize">
-                        {item.weather[0].description}
-                      </span>
-                      <div className="text-base">
-                        <span className="mr-2">Feels Like</span>
-                        <span>
-                          {(item.main.feels_like - 273.15).toFixed(2)}°
-                        </span>
-                      </div>
+                  }
+                  modal
+                  nested
+                >
+                  {(close) => (
+                    <div>
+                      <DetailsModal
+                        id={item.id}
+                        name={item.name}
+                        temp={item.main.temp}
+                        desc={item.weather[0].description}
+                        humidity={item.main.humidity}
+                        wind={item.wind.speed}
+                        maxTemp={item.main.temp_max}
+                        minTemp={item.main.temp_min}
+                        seaLevel={item.main.sea_level}
+                        feelsLike={item.main.feels_like}
+                        pressure={item.main.pressure}
+                        main={item.weather[0].main}
+                        onCancel={close}
+                      />
                     </div>
-                  </div>
-                </button>
+                  )}
+                </Popup>
               ))}
         </div>
       )}

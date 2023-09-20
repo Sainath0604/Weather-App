@@ -1,8 +1,23 @@
 import { Link } from "react-router-dom";
 import { HomeIcon, FavoritesIcon } from "../Icons/Icons";
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-function MdSidebar({ activeComponent, handleComponentChange }) {
+function MdSidebar() {
+  const [activeMenuItem, setActiveMenuItem] = useState(
+    sessionStorage.getItem("activeMenuItem") || "Home"
+  );
+
+  const handleMenuItemClick = (menuItem) => {
+    setActiveMenuItem(menuItem);
+    sessionStorage.setItem("activeMenuItem", menuItem);
+  };
+
+  useEffect(() => {
+    const storedMenuItem = sessionStorage.getItem("activeMenuItem");
+    if (storedMenuItem) {
+      setActiveMenuItem(storedMenuItem);
+    }
+  }, []);
   return (
     <div className="hidden md:block min-h-screen">
       <div className="flex flex-col">
@@ -19,33 +34,37 @@ function MdSidebar({ activeComponent, handleComponentChange }) {
               <div className="flex flex-col">
                 <div className="flex flex-col gap-2 px-4">
                   <ul className="flex flex-col gap-2 text-base font-semibold">
-                    <li
-                      className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
-                        activeComponent === "Cities"
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-blue-600 hover:text-white"
-                      }`}
-                      onClick={() => handleComponentChange("Cities")}
-                    >
-                      <span className="text-xl">
-                        <HomeIcon />
-                      </span>
-                      <span className="">Home</span>
-                    </li>
+                    <Link to="/">
+                      <li
+                        className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
+                          activeMenuItem === "Home"
+                            ? "bg-blue-600 text-white"
+                            : "hover:bg-blue-600 hover:text-white"
+                        }`}
+                        onClick={() => handleMenuItemClick("Home")}
+                      >
+                        <span className="text-xl">
+                          <HomeIcon />
+                        </span>
+                        <span className="">Home</span>
+                      </li>
+                    </Link>
 
-                    <li
-                      className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
-                        activeComponent === "Favorites"
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-blue-600 hover:text-white"
-                      }`}
-                      onClick={() => handleComponentChange("Favorites")}
-                    >
-                      <span className="text-xl">
-                        <FavoritesIcon />
-                      </span>
-                      <span className="">Favorites</span>
-                    </li>
+                    <Link to="favorite">
+                      <li
+                        className={`flex transition-colors duration-150 items-center gap-4 py-2 px-4 rounded-2xl cursor-pointer ${
+                          activeMenuItem === "Favorites"
+                            ? "bg-blue-600 text-white"
+                            : "hover:bg-blue-600 hover:text-white"
+                        }`}
+                        onClick={() => handleMenuItemClick("Favorites")}
+                      >
+                        <span className="text-xl">
+                          <FavoritesIcon />
+                        </span>
+                        <span className="">Favorites</span>
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
@@ -56,8 +75,5 @@ function MdSidebar({ activeComponent, handleComponentChange }) {
     </div>
   );
 }
-MdSidebar.propTypes = {
-  activeComponent: PropTypes.string.isRequired,
-  handleComponentChange: PropTypes.func.isRequired,
-};
+
 export default MdSidebar;

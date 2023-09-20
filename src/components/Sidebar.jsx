@@ -47,10 +47,7 @@ function Sidebar({ activeComponent, handleComponentChange }) {
             </div>
 
             <Disclosure.Panel className="sm:hidden">
-              <SmSidebar
-                activeComponent={activeComponent}
-                handleComponentChange={handleComponentChange}
-              />
+              <SmSidebar />
             </Disclosure.Panel>
           </>
         )}

@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Cities from "./components/Cities";
-import Favorites from "./components/Favorites";
+import Home from "./Pages/Home";
+import Fav from "./Pages/Fav";
 
 export default function App() {
   return (
@@ -9,8 +8,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cities" element={<Cities />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorite" element={<Fav />} />
         </Routes>
       </Router>
     </div>
